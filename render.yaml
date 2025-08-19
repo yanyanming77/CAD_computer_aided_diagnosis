@@ -42,7 +42,7 @@ services:
         value: /var/media
 
     # Persistent storage for user uploads
-    disks:
+    disk:
       - name: media
         mountPath: /var/media
         sizeGB: 1
