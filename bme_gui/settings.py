@@ -11,7 +11,7 @@ from pathlib import Path
 import os
 import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
@@ -20,6 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = 'django-insecure-$qx=5g=%g(=yw%ur%^vs@592!-2sb**2s!xpjmlj!+#i$d7p=)'
 SECRET_KEY = os.environ["SECRET_KEY"]
+
 DEBUG = os.getenv("DEBUG", "False") == "True"
 ALLOWED_HOSTS = ["*"]
 
@@ -83,13 +84,24 @@ WSGI_APPLICATION = 'bme_gui.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
-DATABASES = {
-    "default": dj_database_url.config(
-        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
-        conn_max_age=600,
-        ssl_require=os.getenv("RENDER", "") == "true",  # Render sets envs; safe default
-    )
-}
+DATABASE_URL = os.getenv("DATABASE_URL", "")
+if DATABASE_URL.startswith(("postgres://", "postgresql://")):
+    # Use Postgres (e.g., if you later attach Render Postgres)
+    DATABASES = {
+        "default": dj_database_url.parse(
+            DATABASE_URL,
+            conn_max_age=600,
+            ssl_require=True,   # safe for Postgres
+        )
+    }
+else:
+    # Default to SQLite (free-tier demo)
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
 
 
 # Password validation
