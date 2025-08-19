@@ -8,7 +8,6 @@ services:
     buildCommand: |
       pip install --upgrade pip
       pip install -r requirements.txt
-      cd bme_gui
       python manage.py collectstatic --noinput
 
     startCommand: python manage.py migrate --noinput && gunicorn bme_gui.wsgi:application
