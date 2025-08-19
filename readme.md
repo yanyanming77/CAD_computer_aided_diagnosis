@@ -1,7 +1,7 @@
 # BME 528 Project 
 # Decision Support for Radiation Therapy
 
-👉 [**Try the app here**](https://bme528-app.onrender.com)
+👉 [**Try the app here**](https://bme528-app.onrender.com/)
 
 What's in it:
 1. The bme_gui folder contains all the code to run this app, the app was developed using Django
