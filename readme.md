@@ -4,10 +4,11 @@
 👉 [**Try the app here**](https://bme528-app.onrender.com)
 
 What's in it:
-1. The bme_gui folder contains all the code to run this app
+1. The bme_gui folder contains all the code to run this app, the app was developed using Django
 2. The requirement.txt contains all the required packages to run the app
 3. The generate_insert_data.ipynb is the notebook I used to generate dummy data and store them in the SQlite database
-4. The sample_dcm folder conatins 5 .dcm files to test the functionality of this app
+4. The sample_dcm folder contains 5 .dcm files to test the functionality of this app
+5. The app was deployed to Render and it is publicly accessible
 
 Run the app:
 1. To run the app, install all the packages listed in the requirements.txt file
