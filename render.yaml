@@ -15,7 +15,7 @@ services:
 
     envVars:
       - key: PYTHON_VERSION
-        value: "3.8"
+        value: "3.8.2"
       - key: DJANGO_SETTINGS_MODULE
         value: bme_gui.settings
       - key: DEBUG
