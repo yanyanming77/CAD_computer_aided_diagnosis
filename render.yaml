@@ -1,0 +1,48 @@
+services:
+  - type: web
+    name: bme528-app
+    env: python
+    plan: free
+    autoDeploy: true
+
+    # Your Django app lives in this subfolder (where manage.py is)
+    rootDir: bme_gui
+
+    # Build runs inside rootDir
+    buildCommand: |
+      pip install --upgrade pip
+      pip install -r requirements.txt
+      python manage.py collectstatic --noinput
+      python manage.py migrate --noinput
+
+    # Start Gunicorn against your project's WSGI entrypoint
+    startCommand: gunicorn bme_gui.wsgi:application
+
+    envVars:
+      # Render will provision the latest 3.8.x—good match for your 3.8.2 local
+      - key: PYTHON_VERSION
+        value: 3.8
+
+      # Point Django at the correct settings module
+      - key: DJANGO_SETTINGS_MODULE
+        value: bme_gui.settings
+
+      # You said you'll manage the secret separately.
+      # Omit value here and set it in the Render dashboard before/after first deploy.
+      - key: SECRET_KEY
+
+      # Production defaults
+      - key: DEBUG
+        value: "False"
+      - key: RENDER
+        value: "true"
+
+      # Persist uploads to the mounted disk below
+      - key: MEDIA_ROOT
+        value: /var/media
+
+    # Persistent storage for user uploads
+    disks:
+      - name: media
+        mountPath: /var/media
+        sizeGB: 1
