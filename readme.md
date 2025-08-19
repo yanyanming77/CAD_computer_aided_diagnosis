@@ -28,7 +28,7 @@ Use the app:
       choose a .dcm from the local folder, click "Parse Data" button, the file will be parsed by pydicom parser at the backend, the parsed content will be displayed below
    2. verify the stored .dcm file
       click "Verify Record Storage", a table will show all the records currently in the database, scroll down to the bottom to find the latest uploaded file
-   everytime there's an upload, similarity scores to the current case will be randomly generated for each case in the database, to simulate the general similarity score calculation in the general CAD/data mining process
+   everytime there's an upload, similarity scores to the current case will be randomly generated for each case in the database for now as a simple design, to simulate the general similarity score calculation in the general CAD/data mining process, it will be replaced with the real similarity score calculation algorithm in the future
    3. filter historical cases
        choose ROI from the dropdown menu, select institution by checking the boxes, and define similarity score, ROI dose PTV dose, PTV volume, etc. by dragging the slide bars
        click "Filter Results"
