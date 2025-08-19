@@ -12,7 +12,8 @@ six==1.16.0
 sqlparse==0.4.2
 tenacity==8.0.1
 
-unicorn
+gunicorn
 whitenoise[brotli]
 dj-database-url
 psycopg2-binary
+
