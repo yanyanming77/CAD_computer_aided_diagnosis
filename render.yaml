@@ -1,33 +1,27 @@
 services:
   - type: web
     name: bme528-app
-    runtime: python            # use 'runtime', not the older 'env'
+    runtime: python
     plan: free
-    rootDir: bme_gui           # where your manage.py lives
+    autoDeploy: true
+    rootDir: bme_gui
 
     buildCommand: |
       pip install --upgrade pip
       pip install -r requirements.txt
       python manage.py collectstatic --noinput
-      python manage.py migrate --noinput
+
+    preDeployCommand: python manage.py migrate --noinput
 
     startCommand: gunicorn bme_gui.wsgi:application
 
     envVars:
       - key: PYTHON_VERSION
-        value: 3.8              # matches your local 3.8.x
+        value: "3.8"
       - key: DJANGO_SETTINGS_MODULE
         value: bme_gui.settings
       - key: DEBUG
         value: "False"
-      - key: MEDIA_ROOT
-        value: /var/media
-      # You’re managing SECRET_KEY separately.
-      # Either add it in the dashboard, or include the line below on first Blueprint create:
-      # - key: SECRET_KEY
-      #   sync: false
-
-    disk:                        # << singular
-      name: media
-      mountPath: /var/media
-      sizeGB: 1
+      # Option A: let Render create a strong secret for you
+      - key: SECRET_KEY
+        generateValue: true
