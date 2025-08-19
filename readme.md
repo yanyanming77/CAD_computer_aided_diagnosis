@@ -1,5 +1,7 @@
-# BME 528 Project Group3
+# BME 528 Project 
 # Decision Support for Radiation Therapy
+
+👉 [**Try the app here**](https://bme528-app.onrender.com)
 
 What's in it:
 1. The bme_gui folder contains all the code to run this app
@@ -16,8 +18,11 @@ Run the app:
 Use the app:
 1) home (welcome) page: The home page, you can log in to the system
 2) login page: here you can log in, create a new account, or go back to the welcome page
-3) introduction page: here the background and the general CAD system workflow are introduced
-4) similarity match page: 
+    Use the dummy credentials to enter the home page:  
+    username: dummy_username
+    password: dummy_password  
+4) introduction page: here the background and the general CAD system workflow are introduced
+5) similarity match page: 
    1. upload DICOM
       choose a .dcm from the local folder, click "Parse Data" button, the file will be parsed by pydicom parser at the backend, the parsed content will be displayed below
    2. verify the stored .dcm file
