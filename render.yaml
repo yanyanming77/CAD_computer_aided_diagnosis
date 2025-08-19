@@ -4,11 +4,11 @@ services:
     runtime: python
     plan: free
     autoDeploy: true
-    rootDir: bme_gui
 
     buildCommand: |
       pip install --upgrade pip
       pip install -r requirements.txt
+      cd bme_gui
       python manage.py collectstatic --noinput
 
     startCommand: python manage.py migrate --noinput && gunicorn bme_gui.wsgi:application
